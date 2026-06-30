@@ -1,0 +1,324 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --paper: #f5f2ec;
+  --surface: #fffdf9;
+  --ink: #21201c;
+  --ink-soft: #6b6558;
+  --ink-faint: #a39d8d;
+  --accent: #3e5c50;
+  --accent-soft: #dce5df;
+  --line: #e4dfd3;
+  --danger: #b3492f;
+  --danger-soft: #f3e1da;
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.App {
+  display: flex;
+  height: 100vh;
+  background: var(--paper);
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border-right: 1px solid var(--line);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 20px 16px;
+}
+
+.sidebar-title {
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.note-count {
+  font-family: "JetBrains Mono", monospace;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: var(--accent-soft);
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+.add-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: var(--surface);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.add-btn:hover {
+  background: #324a40;
+  transform: scale(1.06);
+}
+
+.add-btn:active {
+  transform: scale(0.96);
+}
+
+.note-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 10px 16px;
+}
+
+.note-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  margin-bottom: 2px;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.note-item:hover {
+  background: #ece8df;
+}
+
+.note-item.active {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  box-shadow: 0 1px 2px rgba(33, 32, 28, 0.06);
+}
+
+.note-avatar {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: "Lora", serif;
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.note-item.active .note-avatar {
+  background: var(--accent);
+  color: var(--surface);
+}
+
+.note-item-text {
+  min-width: 0;
+}
+
+.note-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-item-preview {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+/* ---------- Editor ---------- */
+
+.editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  min-width: 0;
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 36px 0;
+}
+
+.title-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: "Lora", serif;
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--ink);
+}
+
+.title-input::placeholder {
+  color: var(--ink-faint);
+}
+
+.delete-btn {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--danger);
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.delete-btn:hover {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
+
+.note-meta {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  padding: 8px 36px 18px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+}
+
+.body-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 26px 36px 36px;
+  font-family: "Inter", sans-serif;
+  font-size: 15.5px;
+  line-height: 28px;
+  color: var(--ink);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 27px,
+    var(--line) 27px,
+    var(--line) 28px
+  );
+  background-attachment: local;
+}
+
+.body-input::placeholder {
+  color: var(--ink-faint);
+}
+
+/* ---------- Empty state ---------- */
+
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.empty-icon {
+  font-size: 34px;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* ---------- Scrollbar ---------- */
+
+.note-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.note-list::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 10px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 720px) {
+  .App {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: 40%;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .editor-header,
+  .note-meta,
+  .body-input {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* ---------- Accessibility ---------- */
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.note-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
