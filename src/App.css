@@ -420,3 +420,175 @@ textarea:focus-visible,
   color: var(--accent);
   border-color: var(--accent-soft);
 }
+
+/* ---------- Folder Section ---------- */
+
+.folder-section {
+  padding: 0 10px 8px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 6px;
+}
+
+.folder-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px 4px;
+}
+
+.folder-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.folder-add-btn {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.folder-add-btn:hover {
+  color: var(--accent);
+}
+
+.folder-input-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.folder-input {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 13px;
+  font-family: "Inter", sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  outline: none;
+}
+
+.folder-input:focus {
+  border-color: var(--accent);
+}
+
+.folder-confirm-btn {
+  border: none;
+  background: var(--accent);
+  color: var(--surface);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.folder-item:hover {
+  background: #ece8df;
+}
+
+.folder-item.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.folder-delete-btn {
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.folder-item:hover .folder-delete-btn {
+  opacity: 1;
+}
+
+.folder-delete-btn:hover {
+  color: var(--danger);
+}
+
+/* ---------- Folder Dropdown in Editor ---------- */
+
+.folder-tag-wrapper {
+  position: relative;
+}
+
+.folder-tag-btn {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.folder-tag-btn:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.folder-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px;
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(33, 32, 28, 0.1);
+  z-index: 100;
+}
+
+.folder-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.12s ease;
+}
+
+.folder-dropdown-item:hover {
+  background: var(--accent-soft);
+}
+
+.folder-dropdown-empty {
+  font-size: 12px;
+  color: var(--ink-faint);
+  padding: 4px 8px;
+  margin: 0;
+}

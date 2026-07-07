@@ -7,9 +7,10 @@ function wordCount(text) {
   return trimmed ? trimmed.split(/\s+/).length : 0;
 }
 
-export default function Editor({ note, onDelete, onChange }) {
+export default function Editor({ note, folders, onDelete, onChange, onToggleFolder }) {
   const [sending, setSending] = useState(false);
-  const [status, setStatus] = useState(null); // "sent" | "error" | null
+  const [status, setStatus] = useState(null);
+  const [showFolders, setShowFolders] = useState(false);
 
   if (!note) return <div className="editor"><EmptyState /></div>;
 
@@ -17,7 +18,6 @@ export default function Editor({ note, onDelete, onChange }) {
     if (!note.title && !note.body) return;
     setSending(true);
     setStatus(null);
-
     try {
       await emailjs.send(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
@@ -50,15 +50,39 @@ export default function Editor({ note, onDelete, onChange }) {
           autoFocus
         />
         <div className="editor-actions">
+          <div className="folder-tag-wrapper">
+            <button
+              className="folder-tag-btn"
+              onClick={() => setShowFolders(!showFolders)}
+            >
+              📁 Folders
+            </button>
+            {showFolders && (
+              <div className="folder-dropdown">
+                {folders.length === 0 && (
+                  <p className="folder-dropdown-empty">No folders yet</p>
+                )}
+                {folders.map((folder) => (
+                  <label key={folder.id} className="folder-dropdown-item">
+                    <input
+                      type="checkbox"
+                      checked={note.folder_ids?.includes(folder.id) || false}
+                      onChange={() => onToggleFolder(note.id, folder.id)}
+                    />
+                    {folder.name}
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
           <button
             className="email-btn"
             onClick={handleEmail}
             disabled={sending}
-            aria-label="Email note"
           >
             {sending ? "Sending…" : status === "sent" ? "✓ Sent!" : status === "error" ? "Failed" : "Send Email"}
           </button>
-          <button className="delete-btn" onClick={onDelete} aria-label="Delete note">
+          <button className="delete-btn" onClick={onDelete}>
             Delete
           </button>
         </div>

@@ -1,6 +1,18 @@
 import NoteList from "./NoteList";
+import FolderList from "./FolderList";
 
-export default function Sidebar({ notes, activeId, onSelect, onAdd, onDeselect }) {
+export default function Sidebar({
+  notes,
+  folders,
+  activeId,
+  activeFolderId,
+  onSelect,
+  onAdd,
+  onDeselect,
+  onAddFolder,
+  onDeleteFolder,
+  onSelectFolder,
+}) {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -11,7 +23,17 @@ export default function Sidebar({ notes, activeId, onSelect, onAdd, onDeselect }
           ＋
         </button>
       </div>
+
+      <FolderList
+        folders={folders}
+        activeFolderId={activeFolderId}
+        onSelectFolder={onSelectFolder}
+        onAddFolder={onAddFolder}
+        onDeleteFolder={onDeleteFolder}
+      />
+
       <NoteList notes={notes} activeId={activeId} onSelect={onSelect} />
+
       {notes.length > 0 && (
         <div className="sidebar-footer">
           <button className="deselect-btn" onClick={onDeselect}>
