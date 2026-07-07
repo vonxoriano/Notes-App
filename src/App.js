@@ -8,7 +8,13 @@ export default function App() {
 
   return (
     <div className="App">
-      <Sidebar notes={notes} activeId={activeId} onSelect={setActiveId} onAdd={addNote} />
+      <Sidebar
+        notes={notes}
+        activeId={activeId}
+        onSelect={setActiveId}
+        onAdd={addNote}
+        onDeselect={() => setActiveId(null)}
+      />
       <Editor note={active} onDelete={deleteNote} onChange={updateNote} />
     </div>
   );
